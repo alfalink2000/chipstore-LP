@@ -1,6 +1,6 @@
 {
-  "name": "tienda-online",
-  "homepage": "https://alfalink2000.github.io/chipstore-LP",
+  "name": "chipstore-LP",
+  "homepage": "https://alfalink2000.github.io/chipstore-LP.git",
   "private": true,
   "version": "0.0.0",
   "type": "module",
