@@ -1,0 +1,199 @@
+.section {
+  padding: 5rem 1rem;
+  background-color: #f8fafc;
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  position: relative;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #1e293b;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #4f46e5, #06b6d4);
+  border-radius: 2px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem 1rem;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+  border-color: #c7d2fe;
+}
+
+.iconContainer {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+}
+
+.icon {
+  font-size: 2.5rem;
+  color: #4f46e5;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s ease, color 0.3s ease;
+}
+
+.hoverEffect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #4f46e510, #06b6d410);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.4s ease;
+}
+
+.card:hover .hoverEffect {
+  transform: scale(1);
+}
+
+.card:hover .icon {
+  transform: scale(1.15);
+  color: #6366f1;
+}
+
+.name {
+  font-size: 1.1rem;
+  color: #1e293b;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.count {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.card:hover .name {
+  color: #4f46e5;
+}
+
+/* Colores por categoría */
+.card[data-category="laptops"] .icon {
+  color: #4f46e5;
+}
+
+.card[data-category="componentes"] .icon {
+  color: #06b6d4;
+}
+
+.card[data-category="periféricos"] .icon {
+  color: #10b981;
+}
+
+.card[data-category="monitores"] .icon {
+  color: #f59e0b;
+}
+
+.card[data-category="audio"] .icon {
+  color: #8b5cf6;
+}
+
+.card[data-category="almacenamiento"] .icon {
+  color: #ec4899;
+}
+
+.card[data-category="redes"] .icon {
+  color: #3b82f6;
+}
+
+.card[data-category="gaming"] .icon {
+  color: #ef4444;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 0 1.5rem;
+  }
+
+  .title {
+    font-size: 2.8rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    padding: 0 2rem;
+  }
+
+  .section {
+    padding: 6rem 1rem;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+/* Efecto de fondo decorativo */
+.section::before {
+  content: "";
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #4f46e505 0%, transparent 70%);
+  z-index: 0;
+}
