@@ -1,6 +1,10 @@
 {
   "name": "chipstore-LP",
-  "homepage": "https://alfalink2000.github.io/chipstore-LP.git",
+  "homepage": "https://alfalink2000.github.io/chipstore-LP",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alfalink2000/chipstore-LP.git"
+  },
   "private": true,
   "version": "0.0.0",
   "type": "module",
