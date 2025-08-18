@@ -1,9 +1,9 @@
 {
   "name": "TiendaOnline",
-  "homepage": "https://alfalink2000.github.io/chipstore-LP.git",
+  "homepage": "https://alfalink2000.github.io/chipstore-landing-page.git",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alfalink2000/chipstore-LP.git"
+    "url": "https://github.com/alfalink2000/chipstore-landing-page.git"
   },
   "private": true,
   "version": "0.0.0",

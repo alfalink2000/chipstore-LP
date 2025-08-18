@@ -5,7 +5,6 @@ import {
   FaStar,
   FaShoppingCart,
   FaTruck,
-  FaFire,
   FaBolt,
 } from "react-icons/fa";
 import {
@@ -33,7 +32,6 @@ import cafeteraImg from "../../assets/images/cafetera.png";
 import tvImg from "../../assets/images/tv.png";
 import aireImg from "../../assets/images/aire.png";
 
-// Lista de categorías con imágenes disponibles
 const CATEGORIES_WITH_IMAGES = [
   "Lavadora",
   "Refrigerador",
@@ -47,7 +45,6 @@ const CATEGORIES_WITH_IMAGES = [
   "Aire Acondicionado",
 ];
 
-// Mapeo de categorías a imágenes (sin default)
 const getImageByCategory = (category) => {
   const cat = (category || "").toLowerCase();
   if (cat.includes("lavadora")) return lavadoraImg;
@@ -61,7 +58,7 @@ const getImageByCategory = (category) => {
   if (cat.includes("cafetera")) return cafeteraImg;
   if (cat.includes("tv") || cat.includes("televisor")) return tvImg;
   if (cat.includes("aire acondicionado")) return aireImg;
-  return null; // Retorna null si no hay imagen para la categoría
+  return null;
 };
 
 const ElectroCarousel = ({ title, description, products = [], addToCart }) => {
@@ -70,12 +67,10 @@ const ElectroCarousel = ({ title, description, products = [], addToCart }) => {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
 
-  // Filtramos productos para mostrar solo los que tienen imagen
   const validProducts = products.filter((product) => {
     return product.image || getImageByCategory(product.category) !== null;
   });
 
-  // Generamos productos demo solo para categorías con imágenes
   const displayedProducts =
     validProducts.length >= 8
       ? validProducts
@@ -88,13 +83,11 @@ const ElectroCarousel = ({ title, description, products = [], addToCart }) => {
             .map((_, i) => {
               const category =
                 CATEGORIES_WITH_IMAGES[i % CATEGORIES_WITH_IMAGES.length];
-              const image = getImageByCategory(category);
-
               return {
                 id: `demo-${i}`,
                 name: `${category} Modelo ${i + 1}`,
                 category,
-                image,
+                image: getImageByCategory(category),
                 price: (i + 5) * 10000,
                 rating: (4 + Math.random()).toFixed(1),
                 isNew: i % 3 === 0,
@@ -139,16 +132,13 @@ const ElectroCarousel = ({ title, description, products = [], addToCart }) => {
     if (cat.includes("refrigerador") || cat.includes("nevera"))
       return <BiFridge />;
     if (cat.includes("televisor") || cat.includes("tv")) return <BiTv />;
-    if (cat.includes("horno")) return <FaFire />;
+    if (cat.includes("horno")) return <GiElectric />;
     if (cat.includes("aire acondicionado")) return <MdOutlineAir />;
     if (cat.includes("aspiradora")) return <GiVacuumCleaner />;
     if (cat.includes("microondas")) return <MdMicrowave />;
     if (cat.includes("plancha")) return <MdIron />;
-    if (cat.includes("licuadora") || cat.includes("batidora"))
-      return <GiKitchenScale />;
     if (cat.includes("tostadora")) return <GiToaster />;
     if (cat.includes("cafetera")) return <GiCoffeeCup />;
-    if (cat.includes("purificador")) return <IoWaterOutline />;
     return <GiElectric />;
   };
 
@@ -156,8 +146,12 @@ const ElectroCarousel = ({ title, description, products = [], addToCart }) => {
     <section className={styles.electroSection}>
       <div className={styles.header}>
         <div className={styles.titleContainer}>
-          <h2 className={styles.title}>{title || "Electrodomésticos"}</h2>
-          {description && <p className={styles.description}>{description}</p>}
+          <h2 className={styles.title}>
+            {title || "Electrodomésticos Premium"}
+          </h2>
+          <p className={styles.subtitle}>
+            {description || "Productos seleccionados cuidadosamente"}
+          </p>
         </div>
         <div className={styles.controls}>
           <button
@@ -191,7 +185,7 @@ const ElectroCarousel = ({ title, description, products = [], addToCart }) => {
               product.image || getImageByCategory(product.category);
 
             return (
-              <div key={product.id} className={styles.productCard}>
+              <article key={product.id} className={styles.productCard}>
                 <div className={styles.productBadges}>
                   {product.isNew && (
                     <span className={styles.newBadge}>Nuevo</span>
@@ -210,8 +204,9 @@ const ElectroCarousel = ({ title, description, products = [], addToCart }) => {
                   {imageSrc ? (
                     <img
                       src={imageSrc}
-                      alt={product.name || "Producto electrodoméstico"}
+                      alt={product.name}
                       loading="lazy"
+                      className={styles.productImg}
                     />
                   ) : (
                     <div className={styles.iconPlaceholder}>
@@ -221,7 +216,9 @@ const ElectroCarousel = ({ title, description, products = [], addToCart }) => {
                 </div>
 
                 <div className={styles.productInfo}>
-                  <h3>{product.name || "Producto sin nombre"}</h3>
+                  <h3 className={styles.productTitle}>
+                    {product.name || "Producto"}
+                  </h3>
                   <div className={styles.specs}>
                     {(product.features || []).slice(0, 2).map((feature, i) => (
                       <span key={i} className={styles.specItem}>
@@ -260,18 +257,17 @@ const ElectroCarousel = ({ title, description, products = [], addToCart }) => {
 
                   <button
                     onClick={() => addToCart(product)}
-                    className={
-                      product.inStock
-                        ? styles.addToCartBtn
-                        : styles.addToCartBtnDisabled
-                    }
+                    className={`${styles.addToCartBtn} ${
+                      !product.inStock ? styles.disabled : ""
+                    }`}
                     disabled={!product.inStock}
+                    aria-label={`Añadir ${product.name} al carrito`}
                   >
                     <FaShoppingCart />
-                    {product.inStock ? "Comprar ahora" : "Agotado"}
+                    {product.inStock ? "Añadir al carrito" : "Agotado"}
                   </button>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>
